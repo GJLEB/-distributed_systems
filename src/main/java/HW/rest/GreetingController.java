@@ -19,6 +19,6 @@ public class GreetingController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/topics")
     public Hello addTopic (@RequestBody Map<String, Long> json){
-        return new Hello(counter.incrementAndGet(),"GJLEB", json.get("number"));
+        return new Hello(counter.incrementAndGet(), json.get("number")+1);
     }
 }
