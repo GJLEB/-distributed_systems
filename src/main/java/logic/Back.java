@@ -1,20 +1,22 @@
-package HW.rest;
+package logic;
 
+
+import HW.rest.Hello;
+import repository.NumbersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import repository.NumbersRepository;
-import logic.Back;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
-@RestController
-public class GreetingController {
+@Service
+public class Back {
+
 
     @Autowired
     private NumbersRepository numbersRepository;
 
-    @PostMapping(path="/add")
-    public ResponseEntity addValue (@RequestBody Long number){
+
+    public  ResponseEntity write(Long number){
 
         if (numbersRepository.findByFirstName(number,number-1).isEmpty()){
             Hello hello = new Hello(number,number+1L);
@@ -24,12 +26,4 @@ public class GreetingController {
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong number!!!");
     }
-
 }
-
-//    @GetMapping(params = "/get")
-//    public String a (){
-//        return numbersRepository.findById(1).toString();
-//    }
-
-

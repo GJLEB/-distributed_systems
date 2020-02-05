@@ -1,17 +1,42 @@
 package HW.rest;
 
-public class Hello {
-    private final long id;
-    private final Long number;
+import javax.persistence.*;
 
-    public Hello(long id, Long number) {
-        this.id = id;
-        this.number = number;
+@Entity
+@Table(name = "Numbers")
+public class Hello {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
+    @Column
+    private Long inputNumber;
+    @Column
+    private Long outputNumber;
+
+    protected Hello() {}
+
+    public Hello(Long inputNumber, Long outputNumber) {
+        this.inputNumber = inputNumber;
+        this.outputNumber = outputNumber;
     }
 
-    public long getId() {
+    @Override
+    public String toString() {
+        return String.format(
+                "Hello[id=%d, inputNumber='%s', outputNumber='%s']",
+                id, inputNumber, outputNumber);
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public Long getNumber() { return number; }
+    public Long getInputNumber() {
+        return inputNumber;
+    }
+
+    public Long getOutputNumber() {
+        return outputNumber;
+    }
 }
